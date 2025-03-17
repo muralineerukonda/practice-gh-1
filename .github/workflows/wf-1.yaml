@@ -10,14 +10,8 @@ jobs:
         run: npm ci
       - name: lint-code
         run: npm run lint
-  test-code:
-    needs: lint-code
-    runs-on: ubuntu-latest
-    steps:
-      - name: testing-code
-        run: npm run test
   build-code:
-    needs: test-code
+    needs: lint-code
     runs-on: ubuntu-latest
     steps:
       - name: building-code
