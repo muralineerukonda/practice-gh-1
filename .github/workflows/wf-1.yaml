@@ -1,0 +1,30 @@
+name: basic-install
+on: [push,workflow_dispatch]
+jobs:
+  lint-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout-code
+        uses: actions/checkout@v4
+      - name: lint-code
+        run: npm run lint
+  test-code:
+    needs: lint-code
+    runs-on: ubuntu-latest
+    steps:
+      - name: testing-code
+        run: npm run test
+  build-code:
+    needs: test-code
+    runs-on: ubuntu-latest
+    steps:
+      - name: building-code
+        run: npm run build
+  deploy-code:
+    needs: build-code
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploying-code
+        run: npm run deploy
+
+  
